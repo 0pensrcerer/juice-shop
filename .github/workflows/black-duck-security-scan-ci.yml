@@ -8,7 +8,7 @@
 # read our documentation at https://github.com/blackduck-inc/black-duck-security-scan
 
 name: CI Black Duck security scan
-  
+
 on:
   push:
     branches: [ "master" ]
@@ -29,11 +29,18 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci        # populates node_modules so NPM CLI (HIGH accuracy) can run
+
       - name: Black Duck SCA scan
         uses: blackduck-inc/black-duck-security-scan@805cbd09e806b01907bbea0f990723c2bb85abe9
         with:
           ### ---------- BLACKDUCK SCA SCANNING: REQUIRED FIELDS ----------
           blackducksca_url: https://sca.field-test.blackduck.com
           blackducksca_token: ${{ secrets.BLACKDUCKSCA_TOKEN }}
-
-
