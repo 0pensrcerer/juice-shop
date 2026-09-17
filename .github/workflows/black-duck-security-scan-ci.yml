@@ -36,7 +36,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm ci        # populates node_modules so NPM CLI (HIGH accuracy) can run
+        run: npm install   # populates node_modules so NPM CLI (HIGH accuracy) can run
 
       - name: Black Duck SCA scan
         uses: blackduck-inc/black-duck-security-scan@805cbd09e806b01907bbea0f990723c2bb85abe9
